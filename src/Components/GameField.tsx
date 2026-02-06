@@ -11,7 +11,7 @@ class GameField extends Component {
         for(let row = 0; row < GameField.NUM_ROWS; row++) {
             for(let column = 0; column < GameField.NUM_COLUMNS; column++) {
                 cells.push(
-                    <div className="game-cell"></div>
+                    <div className="game-cell">X</div>
                 )
             }
         }
