@@ -51,25 +51,4 @@ class App extends Component<{}, AppState> {
   }
 }
 
-// function App() {
-//   const players = [
-//     new Player("Kreuz","X"), 
-//     new Player("Kreis","O")
-//   ]
-
-//   function handleMove(row: number, column: number) {
-//     gameFields[row][column] = players[1]
-//   }
-
-//   const gameFields: Player[][] = Array(4).fill(null).map(() => Array(4).fill(null))
-
-//   return (
-//     <>
-//      <div className="page">
-//       <GameBoard onCellClick={handleMove} gameFields={gameFields} />
-//      </div>
-//     </>
-//   )
-// }
-
 export default App
