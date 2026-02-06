@@ -1,4 +1,4 @@
-import GameField from "./Components/GameField"
+import GameBoard from "./Components/GameBoard/GameBoard"
 import Player from "./Components/Player"
 import './App.css'
 
@@ -11,9 +11,7 @@ function App() {
   return (
     <>
      <div className="page">
-      <GameField />
-      <br />
-      <span>{players[0].name} ist dran</span>
+      <GameBoard />
      </div>
     </>
   )
