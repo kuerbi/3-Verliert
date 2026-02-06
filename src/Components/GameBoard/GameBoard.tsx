@@ -1,5 +1,5 @@
 import { Component } from "react"
-import type Player from "../Player"
+import type Player from "../../Models/Player"
 import './GameBoard.css'
 
 type GameBoardProps = {
