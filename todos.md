@@ -1,7 +1,7 @@
 # TODOS
 
-[] Es gibt ein Spielfeld mit 4x4 Feldern.
-[] Das Spiel wird von zwei Spielern gespielt: „Kreuz“ und „Kreis“.
+[x] Es gibt ein Spielfeld mit 4x4 Feldern.
+[?] Das Spiel wird von zwei Spielern gespielt: „Kreuz“ und „Kreis“.
 [] Die Spieler setzen abwechselnd ihr Symbol in ein freies Feld.
 [] Ein Spieler verliert, sobald er drei seiner Symbole in einer Zeile, Spalte oder
 [] Diagonalen (direkt nebeneinander) setzen muss.

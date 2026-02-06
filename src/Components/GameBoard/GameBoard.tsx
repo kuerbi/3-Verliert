@@ -1,24 +1,24 @@
 import { Component } from "react"
+import type Player from "../Player"
 import './GameBoard.css'
 
-class GameBoard extends Component {
-    private static readonly NUM_ROWS = 4
-    private static readonly NUM_COLUMNS = 4
-
+type GameBoardProps = {
+    gameFields: (Player | null)[][]
+    onCellClick: (row: number, column: number) => void
+}
+class GameBoard extends Component<GameBoardProps> {
     render() {
-        const cells = []
-
-        for(let row = 0; row < GameBoard.NUM_ROWS; row++) {
-            for(let column = 0; column < GameBoard.NUM_COLUMNS; column++) {
-                cells.push(
-                    <div className="game-cell"></div>
-                )
-            }
-        }
-
         return (
-            <div className="game-field">
-                {cells}
+            <div className="game-board">
+                {this.props.gameFields.map((row, rowIndex) => 
+                    row.map((cell, colIndex) => (
+                        <div 
+                            key={rowIndex * this.props.gameFields[0].length + colIndex} 
+                            className="game-cell" 
+                            onClick={() => this.props.onCellClick(rowIndex,colIndex)}
+                        >{cell?.symbol}</div>
+                    ))
+                )}
             </div>
         )
     }
