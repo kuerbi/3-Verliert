@@ -1,15 +1,16 @@
 import { Component } from "react"
+import './GameField.css'
 
 class GameField extends Component {
     private static readonly NUM_ROWS = 4
     private static readonly NUM_COLUMNS = 4
 
-    private gameCells: any[] = []
-
     render() {
+        const cells = []
+
         for(let row = 0; row < GameField.NUM_ROWS; row++) {
             for(let column = 0; column < GameField.NUM_COLUMNS; column++) {
-                this.gameCells.push(
+                cells.push(
                     <div className="game-cell"></div>
                 )
             }
@@ -17,7 +18,7 @@ class GameField extends Component {
 
         return (
             <div className="game-field">
-                {this.gameCells}
+                {cells}
             </div>
         )
     }
