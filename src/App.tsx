@@ -1,7 +1,11 @@
+import GameField from "./Components/GameField"
+
 function App() {
   return (
     <>
-     <div>Hello</div>
+     <div>
+      <GameField />
+     </div>
     </>
   )
 }
