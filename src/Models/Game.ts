@@ -36,6 +36,23 @@ class Game {
   }
 
   noMovePossible(player: Player) {
+    let backup = null
+
+    for (let r = 0; r < this.gameField.length; r++) 
+      for (let c = 0; c < this.gameField[0].length; c++) {
+        if (this.gameField[r][c] == null) {
+          backup = this.gameField[r][c]
+
+          this.gameField[r][c] = this.players[this.currentPlayerNumber].symbol
+
+          if(!this.checkPlayerHasLost(player, r, c)) {
+            this.gameField[r][c] = backup
+            return false
+          }
+
+          this.gameField[r][c] = backup
+        }
+    }
     return false
   }
 
@@ -121,7 +138,7 @@ class Game {
       if (this.checkNeighboursMiddle(player, row, col, 1, 0)) {
         return true
       }
-      
+
       // Nach links und rechts testen
       if (this.checkNeighboursMiddle(player, row, col, 0, 1)) {
         return true
