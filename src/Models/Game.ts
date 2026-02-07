@@ -44,7 +44,7 @@ class Game {
     let n = 0
 
     for(let i = 1; i <= 2; i++) {
-        n = this.gameField[row + i*dirRow][col + i * dirCol] == player.symbol ? n + 1 : 0
+      n = this.gameField[row + i*dirRow][col + i * dirCol] == player.symbol ? n + 1 : 0
     }
     
     return n == 2
