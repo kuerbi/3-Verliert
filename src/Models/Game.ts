@@ -50,6 +50,18 @@ class Game {
     return n == 2
   }
 
+  // Um das Mittelfeld zu prüfen
+  private checkNeighboursMiddle(player: Player, row: number, col: number, dirRow: -1 | 0 | 1, dirCol: -1 | 0 | 1) {
+    if ((
+      this.gameField[row - 1 * dirRow][col - 1 * dirCol] == player.symbol &&
+      this.gameField[row + 1 * dirRow][col + 1 * dirCol] == player.symbol
+    )) {
+      return true
+    }
+    
+    return false
+  }
+
   checkPlayerHasLost(player: Player, row: number, col: number): Boolean {
     // Nach oben testen
     if (row > 1) {
@@ -107,24 +119,25 @@ class Game {
       }
     }
 
-    // Nach unten und oben testen
-    if (row == 1 || row == 2) {
-      if ((
-        this.gameField[row+1][col] == player.symbol &&
-        this.gameField[row-1][col] == player.symbol
-      )) {
+    // Mittelfeld Testen
+    if ((row == 1 || row == 2) && (col == 1 || col == 2)) {
+      // Nach unten und oben testen
+      if (this.checkNeighboursMiddle(player, row, col, 1, 0)) {
         return true
       }
-    }
+      // Nach links und rechts testen
+      if (this.checkNeighboursMiddle(player, row, col, 0, 1)) {
+        return true
+      }
 
-    // Nach links und rechts testen
-    if (col == 1 || col == 2) {
-      if ((
-        this.gameField[row][col+1] == player.symbol &&
-        this.gameField[row][col-1] == player.symbol
-      )) {
+      // Diagonalen testen
+      if (this.checkNeighboursMiddle(player, row, col, -1, 1)) {
         return true
       }
+
+      if (this.checkNeighboursMiddle(player, row, col, 1, 1)) {
+        return true
+      }    
     }
 
     return false
