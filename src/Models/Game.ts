@@ -16,7 +16,25 @@ class Game {
       this.gameFields[row][col] = this.players[this.currentPlayerNumber]
       this.round++;
       this.currentPlayerNumber = (this.currentPlayerNumber + 1) % 2
+
+      const lost = this.checkLost()
+
+      if (lost) {
+        alert("Verloren")
+      } else if (this.isDraw()) {
+        alert("Unentschieden")
+      }
     }
+  }
+
+  checkLost() {
+    return false
+  }
+
+  isDraw() {
+    return this.gameFields.every(
+        row => row.every(cell => cell !== null)
+    )
   }
 }
 
