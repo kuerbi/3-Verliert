@@ -52,14 +52,10 @@ class Game {
 
   // Um das Mittelfeld zu prüfen
   private checkNeighboursMiddle(player: Player, row: number, col: number, dirRow: -1 | 0 | 1, dirCol: -1 | 0 | 1) {
-    if ((
+    return (
       this.gameField[row - 1 * dirRow][col - 1 * dirCol] == player.symbol &&
       this.gameField[row + 1 * dirRow][col + 1 * dirCol] == player.symbol
-    )) {
-      return true
-    }
-    
-    return false
+    )
   }
 
   checkPlayerHasLost(player: Player, row: number, col: number): Boolean {
