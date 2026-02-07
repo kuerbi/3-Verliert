@@ -121,6 +121,7 @@ class Game {
       if (this.checkNeighboursMiddle(player, row, col, 1, 0)) {
         return true
       }
+      
       // Nach links und rechts testen
       if (this.checkNeighboursMiddle(player, row, col, 0, 1)) {
         return true
