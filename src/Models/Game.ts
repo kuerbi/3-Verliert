@@ -40,9 +40,15 @@ class Game {
   }
 
   checkPlayerHasLost(player: Player, row: number, col: number) {
+    let c = 0;
+
     // Nach oben testen
     if (row > 1) {
-      if ((this.gameFields[row-1][col] == player) && (this.gameFields[row-2][col] == player)) {
+      for(let i = 1; i <= 2; i++) {
+        c = this.gameFields[row-i][col] == player ? c + 1 : 0
+      }
+
+      if (c == 2) {
         return true
       }
     }
