@@ -1,22 +1,22 @@
 import { Component } from "react"
-import type Player from "../../Models/Player"
 import './GameBoard.css'
+import type { FieldSymbol } from "../../Models/Player"
 
 type GameBoardProps = {
-    gameFields: (Player | null)[][]
+    gameField: FieldSymbol[][]
     onCellClick: (row: number, column: number) => void
 }
 class GameBoard extends Component<GameBoardProps> {
     render() {
         return (
             <div className="game-board">
-                {this.props.gameFields.map((row, rowIndex) => 
+                {this.props.gameField.map((row, rowIndex) => 
                     row.map((cell, colIndex) => (
                         <div 
-                            key={rowIndex * this.props.gameFields[0].length + colIndex} 
+                            key={rowIndex * this.props.gameField[0].length + colIndex} 
                             className="game-cell" 
                             onClick={() => this.props.onCellClick(rowIndex,colIndex)}
-                        >{cell?.symbol}</div>
+                        >{cell}</div>
                     ))
                 )}
             </div>

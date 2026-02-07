@@ -1,4 +1,4 @@
-import Player from "./Player"
+import Player, { type FieldSymbol } from "./Player"
 
 class Game {
   players = [
@@ -9,11 +9,11 @@ class Game {
   currentPlayerNumber: number = 0
   round: number = 0
 
-  gameFields: Player[][] = Array(4).fill(null).map(() => Array(4).fill(null))
+  gameField: FieldSymbol[][] = Array(4).fill(null).map(() => Array(4).fill(null))
 
   makeMove(row: number, col: number) {
-    if (this.gameFields[row][col] == null) {
-      this.gameFields[row][col] = this.players[this.currentPlayerNumber]
+    if (this.gameField[row][col] == null) {
+      this.gameField[row][col] = this.players[this.currentPlayerNumber].symbol
       this.round++;
 
       const lost = this.checkPlayerHasLost(this.players[this.currentPlayerNumber],row,col)
@@ -42,7 +42,7 @@ class Game {
   private verticalTest(player: Player, row: number, col: number, direction: number) {
     let c = 0
     for(let i = 1; i <= 2; i++) {
-      c = this.gameFields[row+(i*direction)][col] == player ? c + 1 : 0
+      c = this.gameField[row+(i*direction)][col] == player.symbol ? c + 1 : 0
     }
 
     return c == 2
@@ -51,7 +51,7 @@ class Game {
   private horizontalTest(player: Player, row: number, col: number, direction: number) {
     let c = 0
     for(let i = 1; i <= 2; i++) {
-      c = this.gameFields[row][col+(i*direction)] == player ? c + 1 : 0
+      c = this.gameField[row][col+(i*direction)] == player.symbol ? c + 1 : 0
     }
 
     return c == 2
@@ -82,7 +82,7 @@ class Game {
       if (row > 1) {
         let n = 0
         for(let i = 1; i <= 2; i++) {
-           n = this.gameFields[row-i][col+i] == player ? n + 1 : 0
+           n = this.gameField[row-i][col+i] == player.symbol ? n + 1 : 0
         }
         
         if (n == 2) {
@@ -93,7 +93,7 @@ class Game {
       if (row < 2) {
         let n = 0
         for(let i = 1; i <= 2; i++) {
-           n = this.gameFields[row+i][col+i] == player ? n + 1 : 0
+           n = this.gameField[row+i][col+i] == player.symbol ? n + 1 : 0
         }
         
         if (n == 2) {
@@ -112,8 +112,8 @@ class Game {
     // Nach unten und oben testen
     if (row == 1 || row == 2) {
       if ((
-        this.gameFields[row+1][col] == player &&
-        this.gameFields[row-1][col] == player
+        this.gameField[row+1][col] == player.symbol &&
+        this.gameField[row-1][col] == player.symbol
       )) {
         return true
       }
@@ -122,8 +122,8 @@ class Game {
     // Nach links und rechts testen
     if (col == 1 || col == 2) {
       if ((
-        this.gameFields[row][col+1] == player &&
-        this.gameFields[row][col-1] == player
+        this.gameField[row][col+1] == player.symbol &&
+        this.gameField[row][col-1] == player.symbol
       )) {
         return true
       }
@@ -131,7 +131,7 @@ class Game {
   }
 
   isDraw() {
-    return this.gameFields.every(
+    return this.gameField.every(
         row => row.every(cell => cell !== null)
     )
   }

@@ -1,11 +1,11 @@
 import { Component } from "react"
 import GameBoard from "./Components/GameBoard/GameBoard"
 import Game from './Models/Game'
-import Player from "./Models/Player"
+import Player, { type FieldSymbol } from "./Models/Player"
 import './App.css'
 
 type AppState = {
-    gameFields: Player[][]
+    gameField: FieldSymbol[][]
 }
 class App extends Component<{}, AppState> {
   game = new Game()
@@ -14,7 +14,7 @@ class App extends Component<{}, AppState> {
     super(props)
 
     this.state = {
-      gameFields: this.game.gameFields
+      gameField: this.game.gameField
     }
 
     this.handleMove = this.handleMove.bind(this)
@@ -22,7 +22,7 @@ class App extends Component<{}, AppState> {
 
   handleMove(row: number, col: number) {
     this.game.makeMove(row, col)
-    this.setState({ gameFields: [...this.game.gameFields.map(row => [...row])] })
+    this.setState({ gameField: [...this.game.gameField.map(row => [...row])] })
   }
 
   render() {
@@ -30,7 +30,7 @@ class App extends Component<{}, AppState> {
      <>
      <div className="page">
       <GameBoard 
-        gameFields={this.state.gameFields} 
+        gameField={this.state.gameField} 
         onCellClick={this.handleMove}  
       />
      </div>
