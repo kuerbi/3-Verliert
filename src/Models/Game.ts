@@ -57,7 +57,7 @@ class Game {
     return c == 2
   }
 
-  checkPlayerHasLost(player: Player, row: number, col: number) {
+  checkPlayerHasLost(player: Player, row: number, col: number): Boolean {
     // Nach oben testen
     if (row > 1) {
       if (this.verticalTest(player, row, col, -1)) {
@@ -128,6 +128,8 @@ class Game {
         return true
       }
     }
+
+    return false
   }
 
   isDraw() {

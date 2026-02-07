@@ -1,4 +1,4 @@
-export type FieldSymbol = "X" | "O"
+export type FieldSymbol = "X" | "O" | null
 
 class Player {
     name: string

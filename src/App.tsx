@@ -1,7 +1,7 @@
 import { Component } from "react"
 import GameBoard from "./Components/GameBoard/GameBoard"
 import Game from './Models/Game'
-import Player, { type FieldSymbol } from "./Models/Player"
+import { type FieldSymbol } from "./Models/Player"
 import './App.css'
 
 type AppState = {
