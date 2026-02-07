@@ -39,16 +39,38 @@ class Game {
     return false
   }
 
+  private verticalTest(player: Player, row: number, col: number, direction: number) {
+    let c = 0
+    for(let i = 1; i <= 2; i++) {
+      c = this.gameFields[row-(i*direction)][col] == player ? c + 1 : 0
+    }
+
+    return c == 2
+  }
+
   checkPlayerHasLost(player: Player, row: number, col: number) {
     let c = 0;
 
     // Nach oben testen
     if (row > 1) {
-      for(let i = 1; i <= 2; i++) {
-        c = this.gameFields[row-i][col] == player ? c + 1 : 0
+      if (this.verticalTest(player, row, col, 1)) {
+        return true
       }
+    }
 
-      if (c == 2) {
+    // Nach unten testen
+    if (row < 2) {
+      if (this.verticalTest(player, row, col, -1)) {
+        return true
+      }
+    }
+
+     // Nach unten und oben testen
+    if (row == 1 || row == 2) {
+      if ((
+        this.gameFields[row+1][col] == player &&
+        this.gameFields[row-1][col] == player
+      )) {
         return true
       }
     }
