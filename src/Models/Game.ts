@@ -53,7 +53,8 @@ class Game {
           this.gameField[r][c] = backup
         }
     }
-    return false
+    
+    return true
   }
 
   // Prüft die Nachbarn
