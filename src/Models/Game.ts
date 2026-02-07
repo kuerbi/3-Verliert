@@ -77,6 +77,29 @@ class Game {
        if (this.horizontalTest(player, row, col, 1)) {
         return true
       }
+
+      // Rechts oben
+      if (row > 1) {
+        let n = 0
+        for(let i = 1; i <= 2; i++) {
+           n = this.gameFields[row-i][col+i] == player ? n + 1 : 0
+        }
+        
+        if (n == 2) {
+          return true
+        }
+      }
+      // Rechts unten
+      if (row < 2) {
+        let n = 0
+        for(let i = 1; i <= 2; i++) {
+           n = this.gameFields[row+i][col+i] == player ? n + 1 : 0
+        }
+        
+        if (n == 2) {
+          return true
+        }
+      }
     }
 
     // Nach links testen
