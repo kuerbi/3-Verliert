@@ -3,8 +3,7 @@ import Game from './Game'
 
 describe("Game", () => {
     let game: Game = new Game()
-
-
+    
     beforeEach(() => {
       game = new Game()
       game.gameField = Array(4).fill(null).map(() => Array(4).fill(null))
@@ -18,7 +17,6 @@ describe("Game", () => {
             }
             expect(game.checkPlayerHasLost(game.players[0], r, c)).toBe(true)
             game.gameField = Array(4).fill(null).map(() => Array(4).fill(null))
-
           }
         }      
     })

@@ -57,6 +57,27 @@ class Game {
     return c == 2
   }
 
+  private diagonalTest(player: Player, row: number, col: number) {
+    let n = 0
+
+    for(let i = 1; i <= 2; i++) {
+        n = this.gameField[row-i][col+i] == player.symbol ? n + 1 : 0
+    }
+    
+    return n == 2
+  }
+
+  // Prüft die Nachbarn
+  private checkNeighbours(player: Player, row: number, col: number, dirRow: -1 | 0 | 1, dirCol: -1 | 0 | 1) {
+    let n = 0
+
+    for(let i = 1; i <= 2; i++) {
+        n = this.gameField[row + i*dirRow][col + i * dirCol] == player.symbol ? n + 1 : 0
+    }
+    
+    return n == 2
+  }
+
   checkPlayerHasLost(player: Player, row: number, col: number): Boolean {
     // Nach oben testen
     if (row > 1) {
@@ -74,29 +95,19 @@ class Game {
 
     // Nach rechts testen
     if (col < 2) {
-       if (this.horizontalTest(player, row, col, 1)) {
+       if (this.checkNeighbours(player, row, col, 0, 1)) {
         return true
       }
 
       // Rechts oben
       if (row > 1) {
-        let n = 0
-        for(let i = 1; i <= 2; i++) {
-           n = this.gameField[row-i][col+i] == player.symbol ? n + 1 : 0
-        }
-        
-        if (n == 2) {
+        if (this.checkNeighbours(player, row, col, -1, 1)) {
           return true
         }
       }
       // Rechts unten
       if (row < 2) {
-        let n = 0
-        for(let i = 1; i <= 2; i++) {
-           n = this.gameField[row+i][col+i] == player.symbol ? n + 1 : 0
-        }
-        
-        if (n == 2) {
+        if (this.checkNeighbours(player, row, col, 1, 1)) {
           return true
         }
       }
