@@ -87,11 +87,20 @@ class Game {
     }
 
     // Rechts Oben (Diagonal)
-    // let c = 0
-    // for(let i = 1; i <= 2; i++) {
-    //   c = this.gameFields[row+i][col-i] == player ? c + 1 : 0
-    // }
-    // console.log("row: " + row + "column: " + col)
+    let n = 0
+
+    try {
+      for(let i = 1; i <= 2; i++) {
+        n = this.gameFields[row-i][col+i] == player ? n + 1 : 0
+        console.log("N: " + n)
+      }
+    } catch(e) {
+      console.log("Heir nicht")
+   }
+
+    if (n == 2) {
+      return true
+    }
 
      // Nach unten und oben testen
     if (row == 1 || row == 2) {
