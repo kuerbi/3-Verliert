@@ -42,28 +42,56 @@ class Game {
   private verticalTest(player: Player, row: number, col: number, direction: number) {
     let c = 0
     for(let i = 1; i <= 2; i++) {
-      c = this.gameFields[row-(i*direction)][col] == player ? c + 1 : 0
+      c = this.gameFields[row+(i*direction)][col] == player ? c + 1 : 0
+    }
+
+    return c == 2
+  }
+
+  private horizontalTest(player: Player, row: number, col: number, direction: number) {
+    let c = 0
+    for(let i = 1; i <= 2; i++) {
+      c = this.gameFields[row][col+(i*direction)] == player ? c + 1 : 0
     }
 
     return c == 2
   }
 
   checkPlayerHasLost(player: Player, row: number, col: number) {
-    let c = 0;
-
     // Nach oben testen
     if (row > 1) {
-      if (this.verticalTest(player, row, col, 1)) {
+      if (this.verticalTest(player, row, col, -1)) {
         return true
       }
     }
 
     // Nach unten testen
     if (row < 2) {
-      if (this.verticalTest(player, row, col, -1)) {
+      if (this.verticalTest(player, row, col, 1)) {
         return true
       }
     }
+
+    // Nach rechts testen
+    if (col < 2) {
+       if (this.horizontalTest(player, row, col, 1)) {
+        return true
+      }
+    }
+
+    // Nach links testen
+    if (col >= 0) {
+       if (this.horizontalTest(player, row, col, -1)) {
+        return true
+      }
+    }
+
+    // Rechts Oben (Diagonal)
+    // let c = 0
+    // for(let i = 1; i <= 2; i++) {
+    //   c = this.gameFields[row+i][col-i] == player ? c + 1 : 0
+    // }
+    // console.log("row: " + row + "column: " + col)
 
      // Nach unten und oben testen
     if (row == 1 || row == 2) {
