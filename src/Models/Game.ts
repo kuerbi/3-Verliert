@@ -15,20 +15,37 @@ class Game {
     if (this.gameFields[row][col] == null) {
       this.gameFields[row][col] = this.players[this.currentPlayerNumber]
       this.round++;
-      this.currentPlayerNumber = (this.currentPlayerNumber + 1) % 2
 
-      const lost = this.checkLost()
+      const lost = this.checkPlayerHasLost(this.players[this.currentPlayerNumber],row,col)
 
       if (lost) {
-        alert("Verloren")
+        alert(`${this.players[this.currentPlayerNumber].name} hat verloren`)
       } else if (this.isDraw()) {
         alert("Unentschieden")
+        return
+      }
+
+      this.currentPlayerNumber = (this.currentPlayerNumber + 1) % 2
+
+      const noMovePossible = this.noMovePossible(this.players[this.currentPlayerNumber])
+
+      if (noMovePossible) {
+        alert(`${this.players[this.currentPlayerNumber].name} hat verloren`)
       }
     }
   }
 
-  checkLost() {
+  noMovePossible(player: Player) {
     return false
+  }
+
+  checkPlayerHasLost(player: Player, row: number, col: number) {
+    // Nach oben testen
+    if (row > 1) {
+      if ((this.gameFields[row-1][col] == player) && (this.gameFields[row-2][col] == player)) {
+        return true
+      }
+    }
   }
 
   isDraw() {
