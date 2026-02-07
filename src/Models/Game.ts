@@ -81,14 +81,14 @@ class Game {
   checkPlayerHasLost(player: Player, row: number, col: number): Boolean {
     // Nach oben testen
     if (row > 1) {
-      if (this.verticalTest(player, row, col, -1)) {
+      if (this.checkNeighbours(player, row, col, -1, 0)) {
         return true
       }
     }
 
     // Nach unten testen
     if (row < 2) {
-      if (this.verticalTest(player, row, col, 1)) {
+      if (this.checkNeighbours(player, row, col, 1, 0)) {
         return true
       }
     }
@@ -105,6 +105,7 @@ class Game {
           return true
         }
       }
+
       // Rechts unten
       if (row < 2) {
         if (this.checkNeighbours(player, row, col, 1, 1)) {
@@ -114,9 +115,25 @@ class Game {
     }
 
     // Nach links testen
-    if (col >= 0) {
+    if (col >= 2) {
        if (this.horizontalTest(player, row, col, -1)) {
+        console.log("LINKS")
         return true
+      }
+
+      // links oben
+      if (row > 1) {
+        if (this.checkNeighbours(player, row, col, -1, -1)) {
+          return true
+        }
+      }
+      
+      // links unten
+      if (row < 2) {
+        console.log("LU")
+        if (this.checkNeighbours(player, row, col, 1, -1)) {
+          return true
+        }
       }
     }
 
