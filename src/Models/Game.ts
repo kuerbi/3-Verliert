@@ -39,34 +39,6 @@ class Game {
     return false
   }
 
-  private verticalTest(player: Player, row: number, col: number, direction: number) {
-    let c = 0
-    for(let i = 1; i <= 2; i++) {
-      c = this.gameField[row+(i*direction)][col] == player.symbol ? c + 1 : 0
-    }
-
-    return c == 2
-  }
-
-  private horizontalTest(player: Player, row: number, col: number, direction: number) {
-    let c = 0
-    for(let i = 1; i <= 2; i++) {
-      c = this.gameField[row][col+(i*direction)] == player.symbol ? c + 1 : 0
-    }
-
-    return c == 2
-  }
-
-  private diagonalTest(player: Player, row: number, col: number) {
-    let n = 0
-
-    for(let i = 1; i <= 2; i++) {
-        n = this.gameField[row-i][col+i] == player.symbol ? n + 1 : 0
-    }
-    
-    return n == 2
-  }
-
   // Prüft die Nachbarn
   private checkNeighbours(player: Player, row: number, col: number, dirRow: -1 | 0 | 1, dirCol: -1 | 0 | 1) {
     let n = 0
@@ -116,8 +88,7 @@ class Game {
 
     // Nach links testen
     if (col >= 2) {
-       if (this.horizontalTest(player, row, col, -1)) {
-        console.log("LINKS")
+      if (this.checkNeighbours(player, row, col, 0, -1)) {
         return true
       }
 
@@ -130,7 +101,6 @@ class Game {
       
       // links unten
       if (row < 2) {
-        console.log("LU")
         if (this.checkNeighbours(player, row, col, 1, -1)) {
           return true
         }
